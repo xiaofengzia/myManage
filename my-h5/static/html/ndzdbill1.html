@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>年度账单</title>
+    <style>
+        table th{
+		border-collapse:collapse;
+		table-layout:fixed;
+		border-radius:5px;
+		overflow:hidden;
+		margin: 10px auto;
+		border:2px solid #70aefb ;
+		background-color: #328ef4;
+		color: #c7dafb;
+		}
+	 table td,th{
+		text-align: left;
+		border:1px solid #70aefb ;
+		vertical-align:middle;
+		
+		width: 80%;
+	}
+		
+	 .table-color-green{
+	 	background-color: green;
+	 
+	 }
+	 
+	 .table-color-grey{
+	 
+	 	background-color:  #696969;
+	 }
+	 
+	  .table-color-black{
+	 
+	 	background-color: black;
+	 }
+	 
+	 .jt-up-color{
+	   color:rgb(230, 90, 113);
+	 }
+	 
+	 .parent-position{
+	 	position: relative;
+	 }
+	 
+	 .child-position{
+	 	    position: absolute;
+		    right: 0;
+		    bottom: 0;
+	 }
+	 
+	 .main-font{
+	 	    font-size: 23px;
+	 }
+     #ndzdTable{
+         text-align:center;
+     }
+     
+
+
+    </style>
+     <script src="../js/libs/jquery.min.js"></script>
+     <script src="../js/ndzdInfo.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+
+             var ndzdbill=JSON.parse(sessionStorage.getItem('ndzdbill'));
+            if(!!!ndzdbill){
+                var reg =new RegExp("(^|&)agentCode=([^&]*)(&|$)","i");
+                var agentCode = window.location.search.substr(1).match(reg);
+                console.log(agentCode);
+                var agentCodeReq = agentCode[2];
+                console.log(agentCodeReq);
+                // url:"https://wttest.greatlife.cn/api/wechat/agentBill/search/"+agentCode[2],// 链接到新服务器地址
+                $.ajax({
+                    url:"https://wttest.greatlife.cn/api/wechat/agentBill/search/",// 链接到新服务器地址
+                    type: 'post',   //当要提交自定义参数时，这个参数要设置成post
+                    data: {"agentCode":agentCodeReq},
+                    dataType: "json", //服务器返回的格式，可以是json
+                    success:function(data){
+                        console.log(data)
+                        if(data.resultCode == '1'){
+                            let result = data.object;
+                            sessionStorage.setItem('ndzdbill', JSON.stringify(result));
+
+                        }
+                    },
+                    error:function(){
+                        
+                    }
+                            
+                })
+            }
+
+           
+
+                         //给body强制定义高度
+            var windowHeight = $(window).height(),
+        　　$body = $("body");
+        　　$body.css("height", windowHeight); //重要代码
+            
+            $("body").on("touchstart", function(e) {
+        　　　　startX = e.originalEvent.changedTouches[0].pageX,
+        　　　　startY = e.originalEvent.changedTouches[0].pageY;
+        　　});
+        　　$("body").on("touchmove", function(e) {
+        　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+        　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+        　　　　X = moveEndX - startX,
+        　　　　Y = moveEndY - startY;
+        
+        　　     if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+                        goLast(1);
+        　　　　}
+        　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+            　　　　　　 goNext(1);
+        　　　　}
+        　　});
+         })
+        
+     </script>
+</head>
+
+<body style="font-size: 16px;">
+    <div id="ndzdTable">
+        <div style="height:50px;">
+        </div>
+        <div id="ndzdTable">
+            <b style="font-size:30px">有你的2019 如此精彩</b><br/>
+            <span style="font-size:20px">长城人寿</span>
+        </div>
+        
+        <div style="height:200px;">
+        </div>
+        <div id="goPage" style="height:50px" >点击进入</div>
+        <div style="height:80px;"></div>
+        <div id="ndzdTable">
+            <b style="font-size:30px">2019</b><br/>
+            <span style="font-size:20px">我的荣耀账单</span>
+        </div>
+    </div>
+</body>
+
+</html>

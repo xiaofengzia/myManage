@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>年度账单</title>
+    <style>
+   
+
+    </style>
+     <script src="../js/libs/jquery.min.js"></script>
+     <script src="../js/ndzdInfo.js"></script>
+     <script type="text/javascript">
+          $(document).ready(function () {
+            var ndzdbill=JSON.parse(sessionStorage.getItem('ndzdbill'));
+            console.log(ndzdbill)
+
+            //是否mdrt
+            var ismdrt =ndzdbill.ismdrt 
+            $("#ismdrt").html(ismdrt);
+            //是否ida
+            var isida=ndzdbill.isida 
+            $("#isida").html(isida);
+            //是否为天雁论坛会员
+             var istyltmember=ndzdbill.istyltmember 
+            $("#istyltmember").html(istyltmember);
+            //高峰会会员
+             var isgfhmember=ndzdbill.isgfhmember 
+            $("#isgfhmember").html(isgfhmember);
+            //长城之星连续星级
+            var starcount=ndzdbill.starcount 
+            $("#starcount").html(starcount);
+
+            
+                   //给body强制定义高度
+                   var windowHeight = $(window).height(),
+        　　$body = $("body");
+        　　$body.css("height", windowHeight); //重要代码
+            
+            $("body").on("touchstart", function(e) {
+        　　　　startX = e.originalEvent.changedTouches[0].pageX,
+        　　　　startY = e.originalEvent.changedTouches[0].pageY;
+        　　});
+        　　$("body").on("touchmove", function(e) {
+        　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+        　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+        　　　　X = moveEndX - startX,
+        　　　　Y = moveEndY - startY;
+        
+        　　     if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+                        goLast(10);
+        　　　　}
+        　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+            　　　　　　 goNext(10);
+        　　　　}
+        　　});
+         })
+     </script>
+</head>
+
+<body style="font-size: 16px;">
+    <div id="ndzdTable">
+        <div>
+            长城翘楚<br>
+            行业典范<br>
+            
+            
+            2019年，你的爱心和努力获得了行业和公司如下荣誉：<br>
+            MDRT——美国百万圆桌荣誉会员 <span id = "ismdrt"></span><br>
+            IDA——世界华人保险铜龙奖 <span id = "isida"></span><br>
+            天雁论坛——第五届天雁论坛银雁会员 <span id = "istyltmember"></span><br>
+            高峰会——长城人寿高峰会荣誉会员 <span id = "isgfhmember"></span><br>
+            长城之星——长城人寿**荣誉会员 <span id = "starcount"></span><br>
+            
+            
+            你的每一个荣耀时刻<br>
+            我都记得，长城人寿因你而骄傲！<br>
+            
+        </div>
+        
+    </div>
+</body>
+
+</html>

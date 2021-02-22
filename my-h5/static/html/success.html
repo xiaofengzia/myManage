@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>支付成功</title>
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+        
+        .red {
+            color: #ff0000;
+        }
+        
+        .headerSuccess {
+            text-align: center;
+            padding: 8px;
+        }
+        
+        .add_complete_button {
+            width: 95%;
+            margin: 0 auto;
+        }
+        
+        .personmessagebutton {
+            background: #d70000;
+            border: 1px solid #d70000;
+            border-radius: .5rem;
+            color: #FFF;
+            line-height: 2.5rem;
+            margin: 0 auto;
+            font-size: 1.13rem;
+            text-align: center;
+            display: block;
+        }
+        
+        .text_red {
+            color: #ff0000;
+        }
+        
+        .pay_ok {
+            padding: 10rem 2rem 1rem 2rem;
+            background: url("../image/pay_succ.png") no-repeat center 1rem;
+            background-size: 10rem;
+            line-height: 2rem;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        
+        .payMeessage {
+            font-size: 17px;
+            padding: 10px;
+            text-align: center;
+            color: #d70000;
+        }
+    </style>
+</head>
+
+<body style="font-size: 13.6px;background-color: #FFFFFF" onload="load();">
+    <div>
+        <!--支付宝微信支付，保融跳转成功页面-->
+        <div class="payMeessage">支付成功！</div>
+        <div class="pay_ok">
+
+            <p>您购买的<span class="text_red" id="zhuname"> </span>等产品<span id="statusMessage"></span>， 投保单串号
+                <span class="text_red" id="policyCode"></span>， 保费
+                <span class="text_red" id="prem"></span>元</p>
+        </div>
+        <div class="red headerSuccess">
+            <p style="color:#d70000;font-weight: 500;">为保障您的权益，请您关注我公司微信公众号，<br/>并绑定您的个人信息，我司将提示您办理续保事宜。</p>
+        </div>
+        <div>
+            <center> <img id="img" style="width:80%;" src="../image/QR.png" /></center>
+            <strong style="margin-top: 100px;font-weight: 900;font-size: 1.2rem;display: block;text-align: center;color: #D70000">感谢您对我公司的信任！</strong>
+        </div>
+        <div style="margin-top: 10px;">
+            <button id="but" onclick="toHome()" class="personmessagebutton add_complete_button" style=" height: 3rem;bottom: 20px;">
+                确认
+            </button>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        window.onload = function() {
+            var url = document.location.toString();　　　　
+            var arrUrl = url.split("?");
+
+            　　　　
+            var para = arrUrl[1];
+            var vars = para.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0].indexOf("zhuname") != -1) {
+                    document.getElementById("zhuname").innerHTML = Base64.decode(pair[1]);
+                }
+                if (pair[0] == "policyCode") {
+                    document.getElementById("policyCode").innerHTML = pair[1];
+                }
+                if (pair[0] == "prem") {
+                    document.getElementById("prem").innerHTML = pair[1];
+                }
+                if (pair[0] == "status") {
+                    var statusMessage = "";
+                    if (pair[1] == '5' || pair[1] == '11') {
+                        statusMessage = "待复核";
+                    } else if (pair[1] == '8' || pair[1] == '13') {
+                        statusMessage = "待核保";
+                    } else if (pair[1] == '20') {
+                        statusMessage = "整单延期";
+                    } else if (pair[1] == '21') {
+                        statusMessage = "整单拒保";
+                    } else if (pair[1] == '7' || pair[1] == '30') {
+                        statusMessage = "待人工审核";
+                    } else {
+                        statusMessage = "核保成功";
+                    }
+                    document.getElementById("statusMessage").innerHTML = statusMessage;
+                }
+            }　　
+            return para;
+        }
+
+        function toHome() {
+            window.location.href = "https://wttest.greatlife.cn"+this.GLOBAL.H5_ROOT+"/index";
+        }
+        // 创建Base64对象
+        var Base64 = {
+            _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+            encode: function(e) {
+                var t = "";
+                var n, r, i, s, o, u, a;
+                var f = 0;
+                e = Base64._utf8_encode(e);
+                while (f < e.length) {
+                    n = e.charCodeAt(f++);
+                    r = e.charCodeAt(f++);
+                    i = e.charCodeAt(f++);
+                    s = n >> 2;
+                    o = (n & 3) << 4 | r >> 4;
+                    u = (r & 15) << 2 | i >> 6;
+                    a = i & 63;
+                    if (isNaN(r)) {
+                        u = a = 64
+                    } else if (isNaN(i)) {
+                        a = 64
+                    }
+                    t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
+                }
+                return t
+            },
+            decode: function(e) {
+                var t = "";
+                var n, r, i;
+                var s, o, u, a;
+                var f = 0;
+                e = e.replace(/[^A-Za-z0-9+/=]/g, "");
+                while (f < e.length) {
+                    s = this._keyStr.indexOf(e.charAt(f++));
+                    o = this._keyStr.indexOf(e.charAt(f++));
+                    u = this._keyStr.indexOf(e.charAt(f++));
+                    a = this._keyStr.indexOf(e.charAt(f++));
+                    n = s << 2 | o >> 4;
+                    r = (o & 15) << 4 | u >> 2;
+                    i = (u & 3) << 6 | a;
+                    t = t + String.fromCharCode(n);
+                    if (u != 64) {
+                        t = t + String.fromCharCode(r)
+                    }
+                    if (a != 64) {
+                        t = t + String.fromCharCode(i)
+                    }
+                }
+                t = Base64._utf8_decode(t);
+                return t
+            },
+            _utf8_encode: function(e) {
+                e = e.replace(/rn/g, "n");
+                var t = "";
+                for (var n = 0; n < e.length; n++) {
+                    var r = e.charCodeAt(n);
+                    if (r < 128) {
+                        t += String.fromCharCode(r)
+                    } else if (r > 127 && r < 2048) {
+                        t += String.fromCharCode(r >> 6 | 192);
+                        t += String.fromCharCode(r & 63 | 128)
+                    } else {
+                        t += String.fromCharCode(r >> 12 | 224);
+                        t += String.fromCharCode(r >> 6 & 63 | 128);
+                        t += String.fromCharCode(r & 63 | 128)
+                    }
+                }
+                return t
+            },
+            _utf8_decode: function(e) {
+                var t = "";
+                var n = 0;
+                var r = c1 = c2 = 0;
+                while (n < e.length) {
+                    r = e.charCodeAt(n);
+                    if (r < 128) {
+                        t += String.fromCharCode(r);
+                        n++
+                    } else if (r > 191 && r < 224) {
+                        c2 = e.charCodeAt(n + 1);
+                        t += String.fromCharCode((r & 31) << 6 | c2 & 63);
+                        n += 2
+                    } else {
+                        c2 = e.charCodeAt(n + 1);
+                        c3 = e.charCodeAt(n + 2);
+                        t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
+                        n += 3
+                    }
+                }
+                return t
+            }
+        }
+    </script>
+</body>
+
+</html>

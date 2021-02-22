@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>年度账单</title>
+    <style>
+     #ndzdTable{
+         text-align:center;
+     }
+    </style>
+     <script src="../js/libs/jquery.min.js"></script>
+     <script src="../js/ndzdInfo.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+            var ndzdbill=JSON.parse(sessionStorage.getItem('ndzdbill'));
+            console.log(ndzdbill)
+            //司龄时间
+            var divisionage =ndzdbill.divisionage 
+            //入司以来累计承保新单件数
+            var allpolicycount=ndzdbill.allpolicycount
+            ////入司以来累计承保保单保险金额
+            var allpremium=ndzdbill.allpremium
+            $("#allpremium").append(ndzdbill.allpremium);
+            $("#allpolicycount").append(ndzdbill.allpolicycount);
+            $("#divisionage").append(ndzdbill.divisionage);
+            $(".allpolicycount").append(ndzdbill.allpolicycount);
+            $(".allpremium").append(ndzdbill.allpremium);
+            $(".allpolicycount1").append(ndzdbill.allpolicycount);
+
+
+                   //给body强制定义高度
+                   var windowHeight = $(window).height(),
+        　　$body = $("body");
+        　　$body.css("height", windowHeight); //重要代码
+            
+            $("body").on("touchstart", function(e) {
+        　　　　startX = e.originalEvent.changedTouches[0].pageX,
+        　　　　startY = e.originalEvent.changedTouches[0].pageY;
+        　　});
+        　　$("body").on("touchmove", function(e) {
+        　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+        　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+        　　　　X = moveEndX - startX,
+        　　　　Y = moveEndY - startY;
+        
+        　　     if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+                        goLast(4);
+        　　　　}
+        　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+            　　　　　　 goNext(4);
+        　　　　}
+        　　});
+         })
+        
+     </script>
+</head>
+
+<body style="font-size: 16px;">
+    <div>
+        <div style="height:50px;">
+        </div>
+        <div>
+            <b style="font-size:30px;text-align:left"><span id="allpolicycount"></span>个家庭<br/>
+                <span id="allpremium"></span>万元</b>
+        </div>
+        <div style="height:80px;">
+        </div>
+        <div style="height:80px;text-align:left"></div>
+        <div>
+            <span style="font-size:20px">在长城的这<span id="divisionage"></span>天</span><br/>
+            <span style="font-size:20px">你将总计<span class="allpremium"></span>万元的保障</span><br/>
+            <span style="font-size:20px"></span>送去了<span class="allpolicycount"></span>个家庭</span></br>
+            <span style="font-size:20px"></span>你是传播爱的天使 </span></br>
+            <span style="font-size:20px"></span>是这<span class="allpolicycount1"></span>个家庭 幸福的守护神</span></br>
+        </div>
+        <div style="height:80px;text-align:left"></div>
+    </div>
+</body>
+
+</html>

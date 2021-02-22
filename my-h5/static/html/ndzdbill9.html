@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>年度账单</title>
+    <style>
+   
+
+    </style>
+     <script src="../js/libs/jquery.min.js"></script>
+     <script src="../js/ndzdInfo.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+            var ndzdbill=JSON.parse(sessionStorage.getItem('ndzdbill'));
+            console.log(ndzdbill)
+            //2019年团队人数
+            var thisyearteamcount =ndzdbill.thisyearteamcount 
+            $(".thisyearteamcount").html(thisyearteamcount);
+            //纳税
+            var thisyearteamtax=ndzdbill.thisyearteamtax 
+            $(".thisyearteamtax").html(thisyearteamtax);
+
+            
+                   //给body强制定义高度
+                   var windowHeight = $(window).height(),
+        　　$body = $("body");
+        　　$body.css("height", windowHeight); //重要代码
+            
+            $("body").on("touchstart", function(e) {
+        　　　　startX = e.originalEvent.changedTouches[0].pageX,
+        　　　　startY = e.originalEvent.changedTouches[0].pageY;
+        　　});
+        　　$("body").on("touchmove", function(e) {
+        　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+        　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+        　　　　X = moveEndX - startX,
+        　　　　Y = moveEndY - startY;
+        
+        　　     if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+                        goLast(9);
+        　　　　}
+        　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+            　　　　　　 goNext(9);
+        　　　　}
+        　　});
+         })
+     </script>
+</head>
+
+<body style="font-size: 16px;">
+    <div id="ndzdTable">
+        <div>
+                <span class = "thisyearteamcount"></span>个伙伴<br>
+                <span class = "thisyearteamtax"></span>纳税<br>
+            这一年，你与同行的伙伴组成了 <span class = "thisyearteamcount"></span>人的团队，在传递爱与责任的同时，为国家和社会纳税 <span class = "thisyearteamtax"></span>元<br>
+            你就是值得尊敬的长城企业家<br>
+            
+            与团队同行，向前走的每一步<br>
+            都如此坚实 充满力量<br>
+            
+        </div>
+        
+    </div>
+</body>
+
+</html>

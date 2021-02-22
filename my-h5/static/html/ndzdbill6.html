@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>年度账单</title>
+    <style>
+     #ndzdTable{
+         text-align:center;
+     }
+    </style>
+     <script src="../js/libs/jquery.min.js"></script>
+     <script src="../js/ndzdInfo.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+            var ndzdbill=JSON.parse(sessionStorage.getItem('ndzdbill'));
+            console.log(ndzdbill)
+            //入司以来理赔保单件数
+            var allclaimcount =ndzdbill.allclaimcount 
+            //入司以来理赔保险金额
+            var allclaimmoney=ndzdbill.allclaimmoney
+            $("#allclaimcount").append(ndzdbill.allclaimcount);
+            $("#allclaimmoney").append(ndzdbill.allclaimmoney);
+            $(".allclaimcount").append(ndzdbill.allclaimcount);
+            $(".allclaimmoney").append(ndzdbill.allclaimmoney);
+
+            var start = new Date(ndzdbill.admissiontime);
+            var end = new Date();
+            var date=Math.floor((end.getTime()-start.getTime())/(24*3600*1000));
+            $("#date").append(date);
+
+            
+                   //给body强制定义高度
+                   var windowHeight = $(window).height(),
+        　　$body = $("body");
+        　　$body.css("height", windowHeight); //重要代码
+            
+            $("body").on("touchstart", function(e) {
+        　　　　startX = e.originalEvent.changedTouches[0].pageX,
+        　　　　startY = e.originalEvent.changedTouches[0].pageY;
+        　　});
+        　　$("body").on("touchmove", function(e) {
+        　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+        　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+        　　　　X = moveEndX - startX,
+        　　　　Y = moveEndY - startY;
+        
+        　　     if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+                        goLast(6);
+        　　　　}
+        　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+            　　　　　　 goNext(6);
+        　　　　}
+        　　});
+         })
+        
+     </script>
+</head>
+
+<body style="font-size: 16px;">
+    <div>
+        <div style="height:50px;">
+        </div>
+        <div>
+            <b style="font-size:30px;text-align:left"><span id="allclaimcount"></span>个家庭<br/>
+            <span id="allclaimmoney"></span>万元</b>
+        </div>
+        <div style="height:80px;">
+        </div>
+        <div style="height:80px;text-align:left"></div>
+        <div>
+            <span style="font-size:20px">与长城人寿共同走过的<span id="date"></span>天</span><br/>
+            <span style="font-size:20px">你已累计为<span class="allclaimcount"></span>个家庭送去了<span class="allclaimmoney"></span>万元的理赔金</span><br/>
+            <span style="font-size:20px">帮助他们度过踏过困难</span></br>
+        </div>
+        <div style="height:80px;text-align:left"></div>
+    </div>
+</body>
+
+</html>

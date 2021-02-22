@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>支付异常</title>
+    <style>
+        .red {
+            color: #ff0000;
+        }
+        
+        .headerSuccess {
+            text-align: center;
+            padding: 8px;
+        }
+        
+        .add_complete_button {
+            width: 95%;
+            margin: 0 auto;
+        }
+        
+        .personmessagebutton {
+            background: #d70000;
+            border: 1px solid #d70000;
+            border-radius: .5rem;
+            color: #FFF;
+            line-height: 2.5rem;
+            margin: 0 auto;
+            font-size: 1.13rem;
+            text-align: center;
+            display: block;
+        }
+        
+        .text_red {
+            color: #ff0000;
+        }
+        
+        .pay_error {
+            padding: 12rem 2rem 1rem 2rem;
+            background: url("../image/pay_defe.png") no-repeat center 1rem;
+            background-size: 10rem;
+            line-height: 2rem;
+            border-bottom: 1px solid #cacaca;
+        }
+    </style>
+</head>
+
+<body style="font-size: 16px;">
+    <div>
+        <!--支付宝微信支付，保融跳转失败页面-->
+        <div class="pay_error">
+            <p>您购买的<span class="text_red" id="zhuname"> </span>等产品<span id="status"></span>， 投保单串号
+                <span class="text_red" id="insuranceNumber"></span>， 保费
+                <span class="text_red" id="prem"></span>元</p>
+        </div>
+        <div class="red headerSuccess" style="margin-top: 30px">
+            <p style="color:#d70000;font-weight: 500;">支付失败</p>
+        </div>
+        <div>
+            <button id="but" onclick="toHome()" class="personmessagebutton add_complete_button" style="margin-right: 0; height: 3rem;position: fixed;bottom: 20px;">
+            返回
+        </button>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        function toHome() {
+            window.location.href = "https://wttest.greatlife.cn"+this.GLOBAL.H5_ROOT+"/index";
+        }
+    </script>
+</body>
+
+</html>

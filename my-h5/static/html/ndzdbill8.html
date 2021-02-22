@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>年度账单</title>
+    <style>
+   
+
+    </style>
+     <script src="../js/libs/jquery.min.js"></script>
+     <script src="../js/ndzdInfo.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+            var ndzdbill=JSON.parse(sessionStorage.getItem('ndzdbill'));
+            console.log(ndzdbill)
+            //2019年团队人数
+            var thisyearteamcount =ndzdbill.thisyearteamcount 
+            //2019年增员人数
+            var thisyearaddcount=ndzdbill.thisyearaddcount 
+
+            $("#thisyearaddcount2").html(thisyearaddcount);
+            $("#thisyearaddcount").html(thisyearaddcount);
+            
+                   //给body强制定义高度
+                   var windowHeight = $(window).height(),
+        　　$body = $("body");
+        　　$body.css("height", windowHeight); //重要代码
+            
+            $("body").on("touchstart", function(e) {
+        　　　　startX = e.originalEvent.changedTouches[0].pageX,
+        　　　　startY = e.originalEvent.changedTouches[0].pageY;
+        　　});
+        　　$("body").on("touchmove", function(e) {
+        　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+        　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+        　　　　X = moveEndX - startX,
+        　　　　Y = moveEndY - startY;
+        
+        　　     if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+                        goLast(8);
+        　　　　}
+        　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+            　　　　　　 goNext(8);
+        　　　　}
+        　　});
+         })
+     </script>
+</head>
+
+<body style="font-size: 16px;">
+    <div id="ndzdTable">
+        <div>
+            <span id = "thisyearaddcount"></span>个同行人<br>
+
+
+
+            你知道<br>
+            想要将爱送去更多的家庭<br>
+            不能靠自己一个人的力量<br>
+            
+            于是你今年推荐<span id = "thisyearaddcount2"></span>人加入长城人寿这个传递责任和爱的家园<br>
+            
+            有长城 更保险<br>
+            让爱传递，让有爱的人与你快乐同行<br>
+            
+        </div>
+        
+    </div>
+</body>
+
+</html>

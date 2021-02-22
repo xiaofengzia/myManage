@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>年度账单</title>
+
+    <script src="../js/libs/jquery.min.js"></script>
+    <script src="../js/ndzdInfo.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+            var ndzdbill=JSON.parse(sessionStorage.getItem('ndzdbill'));
+            console.log(ndzdbill)
+            //2019年给付生存金保单件数
+            var thisyearsurvivalgoldcount  =ndzdbill.thisyearsurvivalgoldcount  
+            //2019年给付生存金金额
+            var thisyearsurvivalgoldmoeny =ndzdbill.thisyearsurvivalgoldmoeny  
+
+            $("#thisyearsurvivalgoldcount").html(thisyearsurvivalgoldcount);
+            $("#thisyearsurvivalgoldmoeny").html(thisyearsurvivalgoldmoeny);
+
+          
+                   //给body强制定义高度
+                   var windowHeight = $(window).height(),
+        　　$body = $("body");
+        　　$body.css("height", windowHeight); //重要代码
+            
+            $("body").on("touchstart", function(e) {
+        　　　　startX = e.originalEvent.changedTouches[0].pageX,
+        　　　　startY = e.originalEvent.changedTouches[0].pageY;
+        　　});
+        　　$("body").on("touchmove", function(e) {
+        　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+        　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+        　　　　X = moveEndX - startX,
+        　　　　Y = moveEndY - startY;
+        
+        　　     if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+                         goLast(7);
+        　　　　}
+        　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+            　　　　　　 goNext(7);
+        　　　　}
+        　　});
+         })
+
+        //  var url = goNext(7);
+        //  console.log(url);
+     </script>
+</head>
+
+<body >
+    <div>
+        <div>
+                <span id = "thisyearsurvivalgoldcount"></span>个红包<br/>
+                <span id = "thisyearsurvivalgoldmoeny"></span>元生存金<br/>
+            
+            
+            这一年 <br/>
+            你为<span id = "thisyearsurvivalgoldcount"></span>个家庭<br/>
+            送去了<span id = "thisyearsurvivalgoldmoeny"></span>元的爱的红包（教育基金、旅游基金、养老生活费……）<br/>
+            
+            
+            祝贺孩子长大成人<br/>
+            助力青年学有所成<br/>
+            祝愿老人长寿安康<br/>
+            你的祝福
+            都写在这个名为爱的红包里
+            
+        </div>
+        
+    </div>
+</body>
+
+</html>
