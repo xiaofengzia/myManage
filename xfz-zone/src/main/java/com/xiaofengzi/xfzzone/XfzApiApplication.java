@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan({"com.xiaofengzi.xfzzone.db.dao.*"})
-public class WxApiApplication {
+public class XfzApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WxApiApplication.class, args);
+		SpringApplication.run(XfzApiApplication.class, args);
 	}
 
 }
