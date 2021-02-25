@@ -47,18 +47,6 @@ xiaofengzi:
     # 本地对象存储配置信息
     local:
       storagePath: /usr/local/nginx/html/storage
-      # 这个地方应该是wx模块的WxStorageController的fetch方法对应的地址
-      address: http://82.156.107.209/wx-api/wx/storage/fetch
+      # 这个地方应该是wx模块的StorageController的fetch方法对应的地址
+      address: http://82.156.107.209/xiaofengzi/api/xfz/storage/fetch
     # 阿里云对象存储配置信息
-    aliyun:
-      endpoint: oss-cn-shenzhen.aliyuncs.com
-      accessKeyId: 111111
-      accessKeySecret: xxxxxx
-      bucketName: litemall
-    # 腾讯对象存储配置信息
-    # 请参考 https://cloud.tencent.com/document/product/436/6249
-    tencent:
-      secretId: 111111
-      secretKey: xxxxxx
-      region: xxxxxx
-      bucketName: litemall

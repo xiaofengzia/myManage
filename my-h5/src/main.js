@@ -70,7 +70,7 @@ import { getAllInsuredInfo} from './utils/voluationUtil'
 const querystring = require("querystring");
 
 
-import {ShareSheet,  Icon as vantIcon, Button as vantButton, Cell as vantCell, CellGroup as vantCellGroup,
+import {ShareSheet,  Icon as vantIcon, Button as vantButton, Cell as vantCell, CellGroup as vantCellGroup,Uploader as vantUploader ,
     NavBar as vantNavBar, Tab as vantTab, Tabs as vantTabs, DatetimePicker as vantDatetimePicker, Popup as vantPopup, Field as vantField, Picker as vantPicker, Radio as vantRadio,
     RadioGroup as vantRadioGroup, 
     Checkbox as vantCheckbox, CheckboxGroup as vantCheckboxGroup, Area as vantArea, Empty as vantEmpty, Dialog as vantDialog, Collapse as vantCollapse, CollapseItem as vantCollapseItem, 
@@ -80,7 +80,7 @@ import {ShareSheet,  Icon as vantIcon, Button as vantButton, Cell as vantCell, C
 Vue.use(vantIcon).use(vantButton).use(vantCell).use(vantCellGroup).use(vantNavBar).use(vantTab).use(vantTabs).use(vantDatetimePicker)
 .use(vantPopup).use(vantField).use(vantPicker).use(vantRadioGroup).use(vantRadio)
 .use(vantCheckbox).use(vantCheckboxGroup).use(vantArea).use(vantEmpty).use(vantDialog).use(vantCollapse).use(vantCollapseItem)
-.use(vantCol).use(vantRow).use(VanImage).use(vantSlider).use(vantToast);
+.use(vantCol).use(vantRow).use(VanImage).use(vantSlider).use(vantToast).use(vantUploader);
 vantToast.setDefaultOptions({ duration: 0 });
 
 

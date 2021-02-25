@@ -13,6 +13,7 @@
   const API_URLS = {
     login: "/login",//登录
     graphValidateCode: "/xfz/graphValidateCode/", //图形验证码
+    uploadImage:"/xfz/storage/upload",//上传图片
 
   }
 

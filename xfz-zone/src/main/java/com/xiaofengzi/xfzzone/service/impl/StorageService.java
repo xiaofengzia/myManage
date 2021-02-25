@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -78,7 +79,7 @@ public class StorageService {
         ossObject.setType(contentType);
         ossObject.setUrl(url);
         ossObject.setAcl("02");
-        ossObject.setAddTime(LocalDateTime.now());
+        ossObject.setAddTime(new Date());
         ossObject.setNum(0);
         ossObjectMapper.insertSelective(ossObject);
 
@@ -122,7 +123,7 @@ public class StorageService {
         ossObject.setType(contentType);
         ossObject.setUrl(url);
         ossObject.setAcl("02");
-        ossObject.setAddTime(LocalDateTime.now());
+        ossObject.setAddTime(new Date());
         ossObject.setNum(0);
         ossObjectMapper.insertSelective(ossObject);
 

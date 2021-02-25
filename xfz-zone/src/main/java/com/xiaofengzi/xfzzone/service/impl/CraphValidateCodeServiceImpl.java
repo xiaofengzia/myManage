@@ -1,7 +1,7 @@
 package com.xiaofengzi.xfzzone.service.impl;
 
-import com.xiaofengzi.xfzzone.dto.common.ConstantForWechat;
 import com.xiaofengzi.xfzzone.dto.common.ValidateCode;
+import com.xiaofengzi.xfzzone.dto.common.XIAOFENGZI_ZONE;
 import com.xiaofengzi.xfzzone.service.interfaces.CraphValidateCodeService;
 import com.xiaofengzi.xfzzone.util.RedisService;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class CraphValidateCodeServiceImpl implements CraphValidateCodeService {
     public ValidateCode generated(String token) {
 
         ValidateCode vCode = new ValidateCode(120,40,4,50);
-        redisService.hset(token+".wechat","graphValidateCode",vCode.getCode(), ConstantForWechat.REDIS_VALIDATEIN);
+        redisService.hset(token+".wechat","graphValidateCode",vCode.getCode(), XIAOFENGZI_ZONE.REDIS_VALIDATEIN);
 
         return vCode;
     }

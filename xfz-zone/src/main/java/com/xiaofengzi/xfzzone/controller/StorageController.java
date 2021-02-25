@@ -1,8 +1,8 @@
 package com.xiaofengzi.xfzzone.controller;
 
 import com.xiaofengzi.xfzzone.db.domain.OssObject;
-import com.xiaofengzi.xfzzone.dto.common.ConstantForWechat;
 import com.xiaofengzi.xfzzone.dto.common.TransResult;
+import com.xiaofengzi.xfzzone.dto.common.XIAOFENGZI_ZONE;
 import com.xiaofengzi.xfzzone.service.impl.StorageService;
 import com.xiaofengzi.xfzzone.service.interfaces.WxStorageService;
 import com.xiaofengzi.xfzzone.util.DateUtil;
@@ -23,9 +23,9 @@ import java.util.Map;
  * 对象存储服务
  */
 @RestController
-@RequestMapping(ConstantForWechat.BASE_PATH+"/storage")
-public class WxStorageController {
-    private final Log logger = LogFactory.getLog(WxStorageController.class);
+@RequestMapping(XIAOFENGZI_ZONE.BASE_PATH+"/storage")
+public class StorageController {
+    private final Log logger = LogFactory.getLog(StorageController.class);
 
     @Autowired
     private StorageService storageService;
