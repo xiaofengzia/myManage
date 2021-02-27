@@ -1,6 +1,8 @@
 package com.xiaofengzi.xfzzone.dto.login;
 
-public class LoginResDTO {
+import com.xiaofengzi.xfzzone.db.domain.AccountUser;
+
+public class LoginResDTO extends AccountUser {
 
     /**
      * 账号
@@ -11,12 +13,6 @@ public class LoginResDTO {
      * 验证码
      */
     private String captcha;
-
-    /**
-     * 密码
-     */
-    private String password;
-
     /**
      * 登陆IP
      */
@@ -40,14 +36,6 @@ public class LoginResDTO {
 
     public void setCaptcha(String captcha) {
         this.captcha = captcha;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getIp() {

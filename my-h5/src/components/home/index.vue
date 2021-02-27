@@ -1,9 +1,9 @@
 <template>
   <div>
     <van-row type="flex" justify="center" align="center" class="back">
-      <van-col span="8" class="specTop specLeft">喜好疯子</van-col>
+      <van-col span="8" class="specTop specLeft">{{userInfo.userName}}</van-col>
       <van-col span="8" class="specTop">我的相册</van-col>
-      <van-col span="8" class="specTop specRight">退出登录</van-col>
+      <van-col span="8" class="specTop specRight" @click="logOut()">退出登录</van-col>
     </van-row>
     <div>
       <van-row
@@ -14,7 +14,7 @@
         v-for="(item,index) in list"
         :key="index"
       >
-        <van-col span="8" class="bodyItem">
+        <van-col span="8" class="bodyItem" @click="uploadPhoto(item)">
           <van-image
             width="6rem"
             height="6rem"
@@ -22,7 +22,7 @@
             :src="item.url"
           ></van-image>
         </van-col>
-        <van-col span="8" class="bodyItem">
+        <van-col span="8" class="bodyItem" @click="uploadPhoto(item)">
           &#12288;相册名称:{{item.name}}
           <br />
           <van-button
@@ -64,16 +64,18 @@
 export default {
   data() {
     return {
-      list: []
+      list: [],
+      userInfo:{},
     };
   },
   created() {
+    sessionStorage.setItem('modifyPhoto', "");
     this.init();
   },
   methods: {
     init(){
-      let userInfo = this.$store.getters.getUserInfo;
-      this.postRequest(this.GLOBAL.API_URLS.selectPhotoAlbum+"/"+userInfo.accountCode).then(ResData => {
+      this.userInfo = this.$store.getters.getUserInfo;
+      this.postRequest(this.GLOBAL.API_URLS.selectPhotoAlbum+"/"+this.userInfo.accountCode).then(ResData => {
             console.log("上传",ResData)
             if(ResData.data.resultCode=='1'){
                 this.list = ResData.data.object;
@@ -82,14 +84,53 @@ export default {
             }
         })
     },
+    logOut(){
+      this.$dialog.confirm({
+        title: '提示',
+        message: '确认退出吗？',
+      })
+        .then(() => {
+          this.userInfo.Authorization="";
+          this.$store.commit("SETUSERINFO", this.userInfo);
+          this.$router.push({ path: "/" });
+        })
+        .catch(() => {
+          // on cancel
+        });
+      
+
+    },
     created() {
       this.$router.push({ path: "/created" });
     },
     modified(item){
-
+        sessionStorage.setItem('modifyPhoto', JSON.stringify(item));
+        this.$router.push({ path: "/created" });
+    },
+    uploadPhoto(item){
+      sessionStorage.setItem('selectPhoto', JSON.stringify(item));
+      this.$router.push({ path: "/photo" });
     },
     deleted(item){
-
+      debugger
+      this.$dialog.confirm({
+        title: '提示',
+        message: '确认删除'+item.name+'这个相册吗？',
+      })
+        .then(() => {
+          item.isDelete=1;
+          this.postRequest(this.GLOBAL.API_URLS.insertOrUpdatePhotoAlbum,item).then(ResData => {
+            console.log("上传",ResData)
+            if(ResData.data.resultCode=='1'){
+                this.init();
+            }else{
+                this.$dialog.alert({message:  "系统异常，请稍后重试"});
+            }
+        })
+        })
+        .catch(() => {
+          // on cancel
+        });
     }
   }
 };

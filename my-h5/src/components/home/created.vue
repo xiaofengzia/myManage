@@ -8,7 +8,7 @@
                 <van-image  width="6rem" v-if="uploadFlag"
                     height="6rem"
                     fit="contain" 
-                    :src="photoImg">
+                    :src="photoParam.url">
                 </van-image>
                 <van-image  width="6rem" v-if="!uploadFlag"
                     height="6rem"
@@ -34,8 +34,6 @@
                 保存
             </van-button>
         </van-row>
-        
-            
   </div>
 </template>
 <script>
@@ -44,12 +42,14 @@ export default {
   data() {
     return {
       uploadFlag:false,
-      photoImg:"",//封面路径
       photoParam:{},
     };
   },
   created() {
-   
+      if(sessionStorage.getItem("modifyPhoto")){
+          this.uploadFlag = true;
+          this.photoParam = JSON.parse(sessionStorage.getItem("modifyPhoto"));
+      }
   },
   methods: {
     afterRead(file){
@@ -60,7 +60,7 @@ export default {
             console.log("上传",ResData)
             if(ResData.data.resultCode=='1'){
                 this.photoParam.ossId=ResData.data.object.id;
-                this.photoImg = ResData.data.object.url;
+                this.photoParam.url = ResData.data.object.url;
                 this.uploadFlag=true;
                 this.$forceUpdate()
             }else{
@@ -69,7 +69,7 @@ export default {
         })
     },
     onOversize(){
-        this.$dialog.alert({message:  "文件大小不能超过500kb"});
+        this.$dialog.alert({message:  "文件大小不能超过5M"});
     },
     save(){
         if(!this.photoParam.ossId){

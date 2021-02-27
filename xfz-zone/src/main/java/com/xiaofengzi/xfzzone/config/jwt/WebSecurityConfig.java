@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 // 对请求进行认证
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/xfz/graphValidateCode/**")
+                .antMatchers(HttpMethod.GET, "/api/xfz/graphValidateCode/**","/api/xfz/storage/**")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login"
                        )

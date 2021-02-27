@@ -100,7 +100,10 @@ export default {
   },
   created() {
     let userInfo = this.$store.getters.getUserInfo;
-    userInfo.officeFlag = undefined;
+    if(userInfo.Authorization){
+      this.$router.push({ path: "/home" });
+      return;
+    }
     this.$store.commit("SETUSERINFO", userInfo);
     this.craphValidateCode();
   },
@@ -150,8 +153,12 @@ export default {
           
           if (ResData.data.resultCode == 1 || ResData.data.resultCode == 8) {
             // 处理成功后处理
+            debugger
             let userInfo = this.$store.getters.getUserInfo;
             userInfo.Authorization = ResData.data.object.accountCodeSM;
+            userInfo.userName = ResData.data.object.userName;
+            userInfo.mobile = ResData.data.object.mobile;
+            userInfo.remark = ResData.data.object.remark;
             userInfo.accountCode = this.agentCommonReqDTO.accountCode.replace(
               /\s+/g,
               ""

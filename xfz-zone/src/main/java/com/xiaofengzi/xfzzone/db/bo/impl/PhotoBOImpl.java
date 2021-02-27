@@ -27,6 +27,7 @@ public class PhotoBOImpl implements PhotoBO {
         if(null == userPhotoAlbum.getId()){
             userPhotoAlbum.setAddTime(new Date());
             userPhotoAlbum.setModifiedTime(new Date());
+            userPhotoAlbum.setIsDelete(0);
             return userPhotoAlbumMapper.insertSelective(userPhotoAlbum);
         }else{
             userPhotoAlbum.setModifiedTime(new Date());
@@ -46,6 +47,7 @@ public class PhotoBOImpl implements PhotoBO {
     public int insertPhoto(UserPhoto userPhoto) {
         userPhoto.setModifiedTime(new Date());
         userPhoto.setModifiedTime(new Date());
+        userPhoto.setIsDelete(0);
         return userPhotoMapper.insertSelective(userPhoto);
     }
 

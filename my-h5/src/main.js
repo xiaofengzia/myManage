@@ -72,15 +72,15 @@ const querystring = require("querystring");
 
 import {ShareSheet,  Icon as vantIcon, Button as vantButton, Cell as vantCell, CellGroup as vantCellGroup,Uploader as vantUploader ,
     NavBar as vantNavBar, Tab as vantTab, Tabs as vantTabs, DatetimePicker as vantDatetimePicker, Popup as vantPopup, Field as vantField, Picker as vantPicker, Radio as vantRadio,
-    RadioGroup as vantRadioGroup, 
+    RadioGroup as vantRadioGroup, Pagination as vantPagination,Grid as vantGrid, GridItem as vantGridItem,
     Checkbox as vantCheckbox, CheckboxGroup as vantCheckboxGroup, Area as vantArea, Empty as vantEmpty, Dialog as vantDialog, Collapse as vantCollapse, CollapseItem as vantCollapseItem, 
     Col as vantCol, Row as vantRow,Image as VanImage,Slider as vantSlider, Toast as vantToast
     //  SubmitBar, Divider, Image as VanImage, Uploader, Card, Tag, List, Skeleton, Loading, PullRefresh, Grid, GridItem, Search
  } from 'vant';
 Vue.use(vantIcon).use(vantButton).use(vantCell).use(vantCellGroup).use(vantNavBar).use(vantTab).use(vantTabs).use(vantDatetimePicker)
-.use(vantPopup).use(vantField).use(vantPicker).use(vantRadioGroup).use(vantRadio)
+.use(vantPopup).use(vantField).use(vantPicker).use(vantRadioGroup).use(vantRadio).use(vantGrid).use(vantGridItem)
 .use(vantCheckbox).use(vantCheckboxGroup).use(vantArea).use(vantEmpty).use(vantDialog).use(vantCollapse).use(vantCollapseItem)
-.use(vantCol).use(vantRow).use(VanImage).use(vantSlider).use(vantToast).use(vantUploader);
+.use(vantCol).use(vantRow).use(VanImage).use(vantSlider).use(vantToast).use(vantUploader).use(vantPagination);
 vantToast.setDefaultOptions({ duration: 0 });
 
 

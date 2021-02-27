@@ -6,6 +6,8 @@ import store from '../store'
 const Login = () => import('@/components/agent/login')
 const Home = () => import('@/components/home/index')
 const Created = () => import('@/components/home/created')
+const Photo = () => import('@/components/home/photo')
+
 
 
 Vue.use(VueRouter)
@@ -40,6 +42,15 @@ const router = new VueRouter({
             component: Created,
             meta: {
                 title: '创建相册',
+                requireAuth: true
+            }
+        },
+        {
+            path: '/photo',
+            name: 'photo',
+            component: Photo,
+            meta: {
+                title: '相册',
                 requireAuth: true
             }
         },

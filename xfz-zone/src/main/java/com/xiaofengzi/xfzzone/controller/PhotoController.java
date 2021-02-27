@@ -4,6 +4,7 @@ import com.xiaofengzi.xfzzone.db.domain.UserPhoto;
 import com.xiaofengzi.xfzzone.db.domain.UserPhotoAlbum;
 import com.xiaofengzi.xfzzone.dto.common.TransResult;
 import com.xiaofengzi.xfzzone.dto.common.XIAOFENGZI_ZONE;
+import com.xiaofengzi.xfzzone.dto.home.PhotoReqDTO;
 import com.xiaofengzi.xfzzone.service.interfaces.PhotoService;
 import com.xiaofengzi.xfzzone.util.StringUtil;
 import org.json.JSONObject;
@@ -58,17 +59,17 @@ public class PhotoController {
         return transResult;
     }
     @RequestMapping("/selectPhoto")
-    public TransResult selectPhoto(@RequestBody JSONObject jsonObject){
+    public TransResult selectPhoto(@RequestBody PhotoReqDTO photoReqDTO){
         TransResult transResult = new TransResult();
         try {
-            String photoAlbumId = jsonObject.getString("photoAlbumId");
-            String start = jsonObject.getString("start");
-            String count = jsonObject.getString("count");
-            if(StringUtil.isEmpty(photoAlbumId)||StringUtil.isEmpty(start)||StringUtil.isEmpty(count)){
+            String photoAlbumId = photoReqDTO.getPhotoAlbumId();
+            int start = photoReqDTO.getStart();
+            int count = photoReqDTO.getCount();
+            if(StringUtil.isEmpty(photoAlbumId)){
                 transResult.failure("参数不全");
                 return transResult;
             }
-            transResult = photoService.selectPhoto(photoAlbumId,Integer.parseInt(start),Integer.parseInt(count));
+            transResult = photoService.selectPhoto(photoAlbumId,start,count);
         }catch (Exception e){
             e.printStackTrace();
             transResult.failure();
