@@ -29,7 +29,7 @@ spring:
     host:  114.115.152.43
     database:  0
     port:  8081
-    password: lichao0810
+    password:
     #连接池配置
     jedis:
       pool.:
@@ -46,7 +46,7 @@ xiaofengzi:
     active: local
     # 本地对象存储配置信息
     local:
-      storagePath: D:/u01/wxFile/storage
+      storagePath: /opt/storage
       # 这个地方应该是wx模块的StorageController的fetch方法对应的地址
-      address: http://localhost:8088/xiaofengzi/api/xfz/storage/fetch
+      address: http://www.xiaofengzi.top/xiaofengzi/api/xfz/storage/fetch
     # 阿里云对象存储配置信息

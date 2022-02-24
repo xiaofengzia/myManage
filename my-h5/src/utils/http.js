@@ -81,8 +81,6 @@ axios.interceptors.response.use(data => {//
     return Promise.reject(error)
 })
 
-let base = '/api'
-
 export const postCommonRequest = (url, params) => {
     // 在请求头添加票证
     return axios({
@@ -97,7 +95,7 @@ export const postRequest = (url, params) => {
     let _Authorization = store.getters.getUserInfo.Authorization;
     return axios({
         method: 'post',
-        url: `${base}${url}`,
+        url: `${url}`,
         data: params,
         headers: {"Authorization": _Authorization}
     });
@@ -108,7 +106,7 @@ export const getRequest = (url, params) => {
     let _Authorization = store.getters.getUserInfo.Authorization;
     return axios({
         method: 'get',
-        url: `${base}${url}`,
+        url: `${url}`,
         data: params,
         headers: {"Authorization": _Authorization}
     });
@@ -119,7 +117,7 @@ export const putRequest = (url, params) => {
     let _Authorization = store.getters.getUserInfo.Authorization;
     return axios({
         method: 'put',
-        url: `${base}${url}`,
+        url: `${url}`,
         data: params,
         headers: {"Authorization": _Authorization}
     });
@@ -130,7 +128,7 @@ export const deleteRequest = (url, params) => {
     let _Authorization = store.getters.getUserInfo.Authorization;
     return axios({
         method: 'delete',
-        url: `${base}${url}`,
+        url: `${url}`,
         data: params,
         headers: {"Authorization": _Authorization}
     });

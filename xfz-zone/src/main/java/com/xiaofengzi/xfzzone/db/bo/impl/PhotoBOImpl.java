@@ -31,7 +31,9 @@ public class PhotoBOImpl implements PhotoBO {
             return userPhotoAlbumMapper.insertSelective(userPhotoAlbum);
         }else{
             userPhotoAlbum.setModifiedTime(new Date());
-            return userPhotoAlbumMapper.updateByPrimaryKeySelective(userPhotoAlbum);
+            UserPhotoAlbumExample userPhotoAlbumExample = new UserPhotoAlbumExample();
+            userPhotoAlbumExample.createCriteria().andIdEqualTo(userPhotoAlbum.getId());
+            return userPhotoAlbumMapper.updateByExampleSelective(userPhotoAlbum,userPhotoAlbumExample);
         }
     }
 
@@ -63,6 +65,8 @@ public class PhotoBOImpl implements PhotoBO {
     public int deletePhoto(UserPhoto userPhoto) {
         userPhoto.setIsDelete(1);
         userPhoto.setModifiedTime(new Date());
-        return userPhotoMapper.updateByPrimaryKeySelective(userPhoto);
+        UserPhotoExample userPhotoExample = new UserPhotoExample();
+        userPhotoExample.createCriteria().andIdEqualTo(userPhoto.getId());
+        return userPhotoMapper.updateByExampleSelective(userPhoto,userPhotoExample);
     }
 }

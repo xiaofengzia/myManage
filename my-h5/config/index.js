@@ -12,7 +12,7 @@ module.exports = {
         assetsPublicPath: '/',
         proxyTable: {
             '/api': {
-                target: 'http://localhost:8088/api/', //设置你调用的接口域名和端口号 别忘了加http
+                target: 'http://localhost:8088/xiaofengzi/api/', //设置你调用的接口域名和端口号 别忘了加http
                 // target: 'http://192.168.1.101:9224/',//设置你调用的接口域名和端口号 别忘了加http
                 changeOrigin: true,
                 pathRewrite: {

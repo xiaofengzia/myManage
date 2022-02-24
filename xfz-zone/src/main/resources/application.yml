@@ -10,4 +10,12 @@ spring:
 
 server:
   port: 8088
+  servlet:
+    context-path: /xiaofengzi
+
+mybatis:
+  mapper-locations:
+  - classpath:mybatis/**/*.xml
+  base-package: com.xiaofengzi.xfzzone.db.dao.generated.mapper
+  config-location:
 

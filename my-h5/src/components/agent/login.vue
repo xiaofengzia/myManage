@@ -113,7 +113,7 @@ export default {
       this.agentCommonReqDTO.randomToken = randomToken;
       console.log("随机串",randomToken)
       this.craphUrl =
-        this.GLOBAL.API_ROOT +
+        this.GLOBAL.API_DOMAIN +this.GLOBAL.API_ROOT+
         this.GLOBAL.API_URLS.graphValidateCode +
         randomToken +
         "/" +

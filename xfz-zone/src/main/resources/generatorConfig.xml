@@ -22,26 +22,34 @@
 
         <!--数据库连接信息-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://82.156.107.209/xiaofengzi?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=false"
+                        connectionURL="jdbc:mysql://114.115.152.43/xiaofengzi?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=false"
                         userId="root"
-                        password="lichao0810!"/>
+                        password="!lichao0810"/>
 
         <javaTypeResolver>
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
         <javaModelGenerator targetPackage="com.xiaofengzi.xfzzone.db.domain" targetProject="src/main/java"/>
-        <sqlMapGenerator targetPackage="com.xiaofengzi.xfzzone.db.dao.generated" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mybatis.generate" targetProject="src/main/resources"/>
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.xiaofengzi.xfzzone.db.dao.generated"
                              targetProject="src/main/java"/>
         <!--表名-->
-        <table tableName="user_photo_album">
+        <table tableName="account_user">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="dic_code">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="oss_object">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
         <table tableName="user_photo">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-
+        <table tableName="user_photo_album">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
 
     </context>
