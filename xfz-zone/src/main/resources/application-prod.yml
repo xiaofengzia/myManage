@@ -29,7 +29,7 @@ spring:
     host:  114.115.152.43
     database:  0
     port:  8081
-    password:
+    password: lichao0810
     #连接池配置
     jedis:
       pool.:

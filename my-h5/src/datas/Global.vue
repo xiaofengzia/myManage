@@ -11,14 +11,14 @@
  
   //api接口地址汇总
   const API_URLS = {
-    login: "/login",//登录
+    login: API_DOMAIN+API_ROOT+"/login",//登录
     graphValidateCode: "/xfz/graphValidateCode/", //图形验证码
-    uploadImage:"/xfz/storage/upload",//上传图片
-    insertOrUpdatePhotoAlbum:"/xfz/photo/insertOrUpdatePhotoAlbum",//创建或修改相册
-    selectPhotoAlbum:"/xfz/photo/selectPhotoAlbum",//查询相册
-    insertPhoto:"/xfz/photo/insertPhoto",//新增照片
-    selectPhoto:"/xfz/photo/selectPhoto",//查询照片
-    deletePhoto:"/xfz/photo/deletePhoto",//删除照片
+    uploadImage:API_DOMAIN+API_ROOT+"/xfz/storage/upload",//上传图片
+    insertOrUpdatePhotoAlbum:API_DOMAIN+API_ROOT+"/xfz/photo/insertOrUpdatePhotoAlbum",//创建或修改相册
+    selectPhotoAlbum:API_DOMAIN+API_ROOT+"/xfz/photo/selectPhotoAlbum",//查询相册
+    insertPhoto:API_DOMAIN+API_ROOT+"/xfz/photo/insertPhoto",//新增照片
+    selectPhoto:API_DOMAIN+API_ROOT+"/xfz/photo/selectPhoto",//查询照片
+    deletePhoto:API_DOMAIN+API_ROOT+"/xfz/photo/deletePhoto",//删除照片
     
 
   }
